@@ -20,7 +20,7 @@ app.disable('x-powered-by');
 
 //routes
 app.use(`/api/${apiVersion}/auth`, authRoutes);
-app.use(`/api/${apiVersion}/users`, userRoutes);
+app.use(`/api/${apiVersion}/users`, authMiddleware.auth, userRoutes);
 app.use(`/api/${apiVersion}/chats`, authMiddleware.auth, chatRoutes);
 
 //error handler
