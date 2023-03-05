@@ -7,6 +7,7 @@ import {
   UpdateDateColumn,
   CreateDateColumn,
 } from 'typeorm';
+
 import { Chat } from './Chat';
 
 @Entity('users')
@@ -14,6 +15,8 @@ export class User extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Column()
+  name: string;
   @Column({
     unique: true,
   })

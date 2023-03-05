@@ -1,6 +1,6 @@
 import app from './app';
 import config from './config';
-import { AppDataSource } from './database';
+import { AppDataSource } from './data-source';
 
 const PORT = config.PORT || 5000;
 
