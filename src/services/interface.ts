@@ -1,5 +1,5 @@
 export interface JWTTOKEN {
-  userId: number;
+  userId: string;
   iss: string;
   iat: number;
 }
