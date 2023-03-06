@@ -2,10 +2,15 @@
 
 A group based chat system
 
-===================
+---
+
 TASK
-=================
-Build a group based chat system that allows registered users to send and recieve real time messages. Here are the key features of the chat system:
+
+---
+
+Build a group based chat system that allows registered users to send and recieve real time messages.
+
+## Features
 
 1. User can register
 2. User can see a list of all registered users
@@ -24,10 +29,11 @@ Build a group based chat system that allows registered users to send and recieve
 - Postman
 - Express
 - Json Web Token
+- Socketio
 
 ## Documentation
 
-Postman: [See documentation]()
+Postman: [See documentation](https://documenter.getpostman.com/view/11724511/2s93JoxRAp)
 
 ## Clone this project
 
