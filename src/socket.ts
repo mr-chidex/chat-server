@@ -1,10 +1,9 @@
 import { Server } from 'socket.io';
-import { httpServer } from './app';
 
 let io: Server;
 
 export default {
-  init: () => {
+  init: (httpServer: any) => {
     io = new Server(httpServer);
     console.log('socket connected');
     return io;
