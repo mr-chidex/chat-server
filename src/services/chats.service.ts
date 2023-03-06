@@ -2,6 +2,7 @@ import { Chat } from '../entities/Chat';
 import { IChat, IUser } from '../models';
 import { errorResponse } from '../utils';
 import { validateChatParam } from '../validators';
+import io from '../socket';
 
 class ChatService {
   validateParams(body: IChat) {
@@ -13,13 +14,17 @@ class ChatService {
 
   async addChat(user: IUser, body: IChat) {
     this.validateParams(body);
-
     const { message } = body;
 
     const chat = await Chat.create({
       message,
       userId: user.id,
     }).save();
+
+    io.getIO().emit('chats', {
+      action: 'create',
+      chat: { chat, creator: { email: user.email, name: user.name } },
+    });
 
     return {
       success: true,
@@ -67,6 +72,8 @@ class ChatService {
     chat.message = message;
     await chat.save();
 
+    io.getIO().emit('chats', { action: 'update', chat: chat });
+
     return {
       success: true,
       message: 'Successfully updated',
@@ -87,6 +94,8 @@ class ChatService {
     }
 
     await chat.remove();
+
+    io.getIO().emit('chats', { action: 'delete', chat: chat });
 
     return {
       success: true,

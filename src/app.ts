@@ -6,8 +6,8 @@ import helmet from 'helmet';
 import config from './config';
 import { ErrorHandler } from './handlers';
 import { authRoutes, chatRoutes, userRoutes } from './routes';
-import { authMiddleware } from './middlewares';
 
+const PORT = config.PORT || 5000;
 const app: Application = express();
 const apiVersion = config.API_VERSION || 'v1';
 
@@ -26,4 +26,5 @@ app.use(`/api/${apiVersion}/chats`, chatRoutes);
 //error handler
 app.use(ErrorHandler.error);
 
-export default app;
+const server = app.listen(PORT, () => console.log(`server running on PORT:: 🚀💥>>> ${PORT}`));
+export const httpServer = server;
