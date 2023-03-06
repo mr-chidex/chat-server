@@ -30,8 +30,14 @@ class ChatService {
 
   async getChats() {
     const chats = await Chat.find({
-      order: {
-        id: 'ASC',
+      relations: ['user'],
+      select: {
+        message: true,
+        id: true,
+        user: {
+          name: true,
+          email: true,
+        },
       },
     });
 
@@ -55,7 +61,7 @@ class ChatService {
     });
 
     if (!chat) {
-      return errorResponse('Chat not found: Cannot update', 403);
+      return errorResponse('Chat not found: Cannot update', 404);
     }
 
     chat.message = message;
@@ -77,7 +83,7 @@ class ChatService {
     });
 
     if (!chat) {
-      return errorResponse('Chat not found: Cannot delete', 403);
+      return errorResponse('Chat not found: Cannot delete', 404);
     }
 
     await chat.remove();
