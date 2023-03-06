@@ -18,13 +18,13 @@ class ChatController {
 
   //@PATCH
   async updateChat(req: IRequest, res: Response) {
-    const response = await chatService.updateChat(req.user!, req.body);
+    const response = await chatService.updateChat(req.user!, req.body, req.params?.chatId);
     res.status(200).json({ ...response });
   }
 
   //@DELETE
   async deleteChat(req: IRequest, res: Response) {
-    const response = await chatService.removeChat(req.user!);
+    const response = await chatService.removeChat(req.user!, req.params?.chatId);
     res.status(200).json({ ...response });
   }
 }

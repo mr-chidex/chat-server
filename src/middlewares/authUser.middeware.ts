@@ -20,24 +20,27 @@ class AuthMiddleware {
 
     const token = authorization.replace('Bearer ', '');
 
+    let user: User | null;
+
     try {
       const decodeToken = jwt.verify(token, config.SECRET_KEY) as JWTTOKEN;
 
-      const user = await User.findOneBy({ id: decodeToken?.userId });
-      if (!user) {
-        return errorResponse('Unauthorized Access', 403);
-      }
-
-      if (user.token !== token) {
-        return errorResponse('Unauthorized Access: Invalid token', 403);
-      }
-
-      req.user = user;
-
-      next();
+      user = await User.findOneBy({ id: decodeToken?.userId });
     } catch (err: any) {
       return errorResponse(err.message, 401);
     }
+
+    if (!user) {
+      return errorResponse('Unauthorized Access', 403);
+    }
+
+    if (user.token !== token) {
+      return errorResponse('Unauthorized Access: User logout', 403);
+    }
+
+    req.user = user;
+
+    next();
   }
 }
 
