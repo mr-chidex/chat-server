@@ -18,18 +18,18 @@ export class Chat extends BaseEntity {
   @Column('text', { nullable: false })
   message: string;
 
-  @Column()
+  @Column('text', { nullable: false })
   userId: string;
 
   @ManyToOne(() => User, (user) => user.messages, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'userId' })
   user: User;
 
-  @Column()
+  @Column('text', { nullable: false })
   @CreateDateColumn()
   createdAt: Date;
 
-  @Column()
+  @Column('text', { nullable: false })
   @UpdateDateColumn()
   updatedAt: Date;
 }

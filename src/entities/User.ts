@@ -15,27 +15,29 @@ export class User extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column('text', { nullable: true })
   name: string;
-  @Column({
+
+  @Column('text', {
     unique: true,
+    nullable: true,
   })
   email: string;
 
-  @Column()
+  @Column('text', { nullable: true })
   password: string;
 
-  @Column({ nullable: true })
+  @Column('text', { nullable: true })
   token: string;
 
   @OneToMany(() => Chat, (chat) => chat.user, { cascade: true })
   messages: Chat[];
 
-  @Column()
+  @Column('text', { nullable: true })
   @CreateDateColumn()
   createdAt: Date;
 
-  @Column()
+  @Column('text', { nullable: true })
   @UpdateDateColumn()
   updatedAt: Date;
 }

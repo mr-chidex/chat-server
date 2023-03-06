@@ -9,7 +9,7 @@
     "clean": "rm -rf dist",
     "build:app": "tsc -p .",
     "build:watch": "tsc --watch",
-    "test": "jest",
+    "test": "jest --forceExit",
     "test:watch": "jest --watchAll  --forceExit --detectOpenHandles",
     "migration:create": "typeorm migration:create  src/migrations/Chat",
     "migration:gen": "typeorm migration:generate -o dist/migrations/Chat -d dist/data-source.js",
@@ -23,6 +23,8 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.20.12",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-proposal-decorators": "^7.21.0",
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-typescript": "^7.18.6",
     "@types/bcrypt": "^5.0.0",

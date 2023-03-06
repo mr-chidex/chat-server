@@ -25,7 +25,7 @@ class AuthMiddleware {
     try {
       const decodeToken = jwt.verify(token, config.SECRET_KEY) as JWTTOKEN;
 
-      user = await User.findOneBy({ id: decodeToken?.userId });
+      user = await User.findOneBy({ id: decodeToken.userId });
     } catch (err: any) {
       return errorResponse(err.message, 401);
     }
